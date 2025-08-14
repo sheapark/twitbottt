@@ -584,14 +584,14 @@ def run_once():
     text = build_text(now, ranks, views, state, site_changes=site_changes)
     print("----- Tweet body -----\n" + text + "\n----------------------")
 
-    code = tweet(text)
-    if 200 <= code < 300:
-        state.setdefault("ranks", {})
-        for _, key in SITES:
-            state["ranks"][key] = as_int(ranks.get(key))
-        state["youtube_views"] = views
-        state["last_posted_at"] = now.strftime("%Y-%m-%d %H:%M:%S")
-        save_state(state)
+    # code = tweet(text)
+    # if 200 <= code < 300:
+    #     state.setdefault("ranks", {})
+    #     for _, key in SITES:
+    #         state["ranks"][key] = as_int(ranks.get(key))
+    #     state["youtube_views"] = views
+    #     state["last_posted_at"] = now.strftime("%Y-%m-%d %H:%M:%S")
+    #     save_state(state)
 
 
 # ===================== 스케줄러(매시 정각) =====================
