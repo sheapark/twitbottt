@@ -18,7 +18,13 @@ jobs:
           python-version: '3.13'
 
       - name: Install dependencies
-        run: pip3 install -r requirements.txt
+        run: |
+          pip3 install -r requirements.txt
+
+      # 📌 Playwright 브라우저 설치 단계 추가
+      - name: Install Playwright browsers
+        run: |
+          python3 -m playwright install --with-deps
 
       - name: Run tweet script
         env:
