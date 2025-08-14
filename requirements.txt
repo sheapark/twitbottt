@@ -1,0 +1,9 @@
+requests
+requests-oauthlib
+python-dotenv
+apscheduler
+playwright
+beautifulsoup4
+lxml
+pytz
+
