@@ -1,28 +1,33 @@
-name: Tweet Scheduler
+name: Tweet Bot
 
 on:
   schedule:
-    # UTC 기준: 23시(KST 08시)부터 다음날 15시(KST 24시)까지 매 정각 실행
-    - cron: "0 23,0-15 * * *"
-  workflow_dispatch: # 수동 실행 버튼
+    - cron: '0 23-15/1 * * *' # UTC 기준, 한국시간 08~24시 매 정각 실행
+  workflow_dispatch: # 수동 실행도 가능
 
 jobs:
   run-tweet:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.13'
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
-      - name: Run script
-        run: python main.py
+      - name: Run tweet script
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          API_KEY_SECRET: ${{ secrets.API_KEY_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YT_VIDEO_ID: ${{ secrets.YT_VIDEO_ID }}
+          TARGET_TITLE: ${{ secrets.TARGET_TITLE }}
+          TARGET_ARTIST: ${{ secrets.TARGET_ARTIST }}
+        run: python3 tweet.py --once
