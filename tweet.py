@@ -506,6 +506,11 @@ def build_text(now_kst: datetime,
 
     lines.append("")
     lines.append(f"🎬 {format_views(views)}")
+    # 해시태그 3줄 추가
+    lines.append("")  
+    lines.append("#NCTWISH #Surf #NCTWISH_Surf")
+    lines.append("#올여름_최고의Surfer_WISH")
+    lines.append("#最高の夏_WISHと一緒にSURF")
     return "\n".join(lines)
 
 # ===================== 실행(한 번) =====================
